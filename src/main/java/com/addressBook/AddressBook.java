@@ -1,22 +1,26 @@
 package com.addressBook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBook {
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Contact> contacts = new ArrayList<>();
+    static HashMap<String, ArrayList<Contact>> map = new HashMap<String, ArrayList<Contact>>();
+    Contact contact = new Contact();
+    static AddressBook book = new AddressBook();
 
-       public void deleteContact() {
+    public void deleteContact() {
         System.out.println("Enter first name of contact you want to delete");
         String fName = sc.next();
-        for (int i=0;i<contacts.size();i++) {
+        for (int i = 0; i < contacts.size(); i++) {
             if (contacts.get(i).getfirstName().equalsIgnoreCase(fName)) {
                 contacts.remove(i);
-            }
-            else
+            } else
                 System.out.println("Please enter a valid first name");
         }
+        System.out.println(contacts);
     }
 
     public void editContact() {
@@ -61,14 +65,14 @@ public class AddressBook {
                     }
                     default -> System.out.println("Invalid Choice");
                 }
-
+                System.out.println(contacts);
             } else
                 System.out.println("Please enter a valid first name");
+
         }
     }
 
     public void addContact() {
-        Contact contact = new Contact();
         System.out.println("Enter the first name");
         contact.setfirstName(sc.next());
         System.out.println("Enter the last name");
@@ -90,15 +94,92 @@ public class AddressBook {
     }
 
     public static void main(String[] args) {
-        AddressBook book = new AddressBook();
         System.out.println("Welcome to Address Book");
-        System.out.println("Enter what function you want to perform");
-        System.out.println("1. add new contact 2. Edit contact 3.Delete Contact");
-        int choice = sc.nextInt();
-        switch (choice) {
-            case 1 -> book.addContact();
-            case 2 -> book.editContact();
-            case 3 -> book.deleteContact();
+        book.addAddressBook();
+    }
+
+    public void addAddressBook() {
+        while (true) {
+            System.out.println("Choose your function 1. Create new address book 2. Edit details 3.Display 4. Exit");
+            int choose = sc.nextInt();
+            if (choose == 4) {
+                System.exit(0);
+                break;
+            }
+            switch (choose) {
+                case 1:
+                    System.out.println("Enter the name of Address Book");
+                    String addressName = sc.next();
+                    if (map.containsKey(addressName)) {
+                        System.out.println("Address Book already exists");
+                        break;
+                    }
+                    ArrayList<Contact> newAddressBook = new ArrayList<>();
+                    contacts = newAddressBook;
+                    while (true) {
+                        System.out.println("Enter what function you want to perform");
+                        System.out.println("1. Add new contact 2. Edit contact 3.Delete Contact");
+                        int choice = sc.nextInt();
+                        switch (choice) {
+                            case 1:
+                                book.addContact();
+                                break;
+                            case 2:
+                                book.editContact();
+                                break;
+                            case 3:
+                                book.deleteContact();
+                                break;
+                            default:
+                                System.out.println("Please choose a valid option");
+                        }
+                        map.put(addressName, contacts);
+                        System.out.println(map);
+                        break;
+                    }
+                        case 2:
+                            System.out.println("Enter name of address book");
+                            String oldAddressBook = sc.next();
+                            if (map.containsKey(oldAddressBook)) {
+                                ArrayList<Contact> old_AddressBook = new ArrayList<>();
+                                contacts = old_AddressBook;
+                                contacts = map.get(oldAddressBook);
+                                while (true) {
+                                    System.out.println("Choose your function 1. Add contact 2. Edit contact 3. Delete Contact 4.Exit");
+                                    int choice1 = sc.nextInt();
+                                    if (choice1 == 4) {
+                                        System.exit(0);
+                                        break;
+                                    }
+                                    switch (choice1) {
+                                        case 1:
+                                            book.addContact();
+                                            break;
+                                        case 2:
+                                            book.editContact();
+                                            break;
+                                        case 3:
+                                            book.deleteContact();
+                                            break;
+                                        default:
+                                            System.out.println("Choose a valid option");
+                                    }
+                                    map.put(oldAddressBook, contacts);
+                                    System.out.println(map);
+                                }
+                            } else {
+                                System.out.println("Enter valid option");
+                            }
+                            break;
+                        case 3:
+                            System.out.println(map);
+                            break;
+                        default:
+                            System.out.println("Enter a valid option");
+                    }
+            }
         }
     }
-}
+
+
+
