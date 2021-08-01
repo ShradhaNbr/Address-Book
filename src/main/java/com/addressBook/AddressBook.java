@@ -86,6 +86,7 @@ public class AddressBook {
         System.out.println("Enter the Email Id");
         contact.setemail(sc.next());
         contacts.add(contact);
+        System.out.println(contacts);
     }
 
     public static void main(String[] args) {

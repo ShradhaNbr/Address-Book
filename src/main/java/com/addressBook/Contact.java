@@ -59,4 +59,8 @@ public class Contact {
     public void setemail(String email) {
         this.email = email;
     }
+    @Override
+    public String toString() {
+        return " First Name " + firstName + " Last Name " + lastName + " Address " + address + " City " + city + " State " + state + " Zip code " + zip + " Phone number " + phoneNumber + "email id " + email;
+    }
 }

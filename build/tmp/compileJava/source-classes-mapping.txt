@@ -1,4 +1,4 @@
-com/addressBook/Contact.java
- com.addressBook.Contact
 com/addressBook/AddressBook.java
  com.addressBook.AddressBook
+com/addressBook/Contact.java
+ com.addressBook.Contact
