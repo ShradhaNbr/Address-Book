@@ -20,7 +20,21 @@ public class AddressBook {
             } else
                 System.out.println("Please enter a valid first name");
         }
+        System.out.println("Contact Deleted");
         System.out.println(contacts);
+    }
+    public void duplicateCheck() {
+        System.out.println("Enter the first name to check");
+        String firstName = sc.next();
+        for (int i=0;i<contacts.size();i++) {
+            String contactName = contacts.get(i).getfirstName();
+            if (firstName.equalsIgnoreCase(contactName)) {
+                System.out.println("Contact exits");
+            }else
+                System.out.println("Add the contact");
+                break;
+
+        }
     }
 
     public void editContact() {
@@ -65,6 +79,7 @@ public class AddressBook {
                     }
                     default -> System.out.println("Invalid Choice");
                 }
+                System.out.println("Edited List is");
                 System.out.println(contacts);
             } else
                 System.out.println("Please enter a valid first name");
@@ -118,7 +133,7 @@ public class AddressBook {
                     contacts = newAddressBook;
                     while (true) {
                         System.out.println("Enter what function you want to perform");
-                        System.out.println("1. Add new contact 2. Edit contact 3.Delete Contact");
+                        System.out.println("1. Add new contact 2. Edit contact 3.Delete Contact 4.Check Duplicate");
                         int choice = sc.nextInt();
                         switch (choice) {
                             case 1:
@@ -129,6 +144,9 @@ public class AddressBook {
                                 break;
                             case 3:
                                 book.deleteContact();
+                                break;
+                            case 4 :
+                                book.duplicateCheck();
                                 break;
                             default:
                                 System.out.println("Please choose a valid option");
@@ -145,9 +163,9 @@ public class AddressBook {
                                 contacts = old_AddressBook;
                                 contacts = map.get(oldAddressBook);
                                 while (true) {
-                                    System.out.println("Choose your function 1. Add contact 2. Edit contact 3. Delete Contact 4.Exit");
+                                    System.out.println("Choose your function 1. Add contact 2. Edit contact 3. Delete Contact 4.To check duplicate 5.exit");
                                     int choice1 = sc.nextInt();
-                                    if (choice1 == 4) {
+                                    if (choice1 == 5) {
                                         System.exit(0);
                                         break;
                                     }
@@ -160,6 +178,9 @@ public class AddressBook {
                                             break;
                                         case 3:
                                             book.deleteContact();
+                                            break;
+                                        case 4:
+                                            book.duplicateCheck();
                                             break;
                                         default:
                                             System.out.println("Choose a valid option");
