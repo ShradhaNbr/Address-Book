@@ -1,66 +1,95 @@
 package com.addressBook;
-
 public class Contact {
     String firstName;
     String lastName;
     String address;
     String city;
     String state;
-    long zip;
-    long phoneNumber;
+    Long zipCode;
+    Long phoneNumber;
     String email;
 
-    //Using getters and setters
-    public String getfirstName() {
-        return firstName;
-    }
-    public void setfirstName(String firstName) {
+    public Contact(String firstName, String lastName, String address, String city, String state, Long zipCode,
+                       Long phoneNumber, String email) {
         this.firstName = firstName;
-    }
-    public String getlastName() {
-        return lastName;
-    }
-    public void setlastName(String lastName) {
         this.lastName = lastName;
-    }
-    public String getaddress() {
-        return address;
-    }
-    public void setaddress(String address) {
         this.address = address;
-    }
-    public String getcity() {
-        return city;
-    }
-    public void setcity(String city) {
         this.city = city;
-    }
-    public String getstate() {
-        return state;
-    }
-    public void setstate(String state) {
         this.state = state;
-    }
-    public long getzip() {
-        return zip;
-    }
-    public void setzip(long zip) {
-        this.zip = zip;
-    }
-    public long getphoneNumber() {
-        return phoneNumber;
-    }
-    public void setphoneNumber(long phoneNumber) {
+        this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
-    }
-    public String getemail() {
-        return email;
-    }
-    public void setemail(String email) {
         this.email = email;
     }
+
     @Override
     public String toString() {
-        return " First Name " + firstName + " Last Name " + lastName + " Address " + address + " City " + city + " State " + state + " Zip code " + zip + " Phone number " + phoneNumber + "email id " + email;
+        return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+                + ", state=" + state + ", zipCode=" + zipCode + ", phoneNumber=" + phoneNumber + ", email=" + email
+                + "]";
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Long getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(Long zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
