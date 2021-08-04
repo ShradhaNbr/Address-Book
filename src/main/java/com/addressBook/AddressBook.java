@@ -10,7 +10,7 @@ public class AddressBook {
 
         while (true) {
             System.out.println("Welcome to Address Book System");
-            System.out.println("Enter yur choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.Exit");
+            System.out.println("Enter yur choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -45,6 +45,9 @@ public class AddressBook {
                 case 6:
                     sc.close();
                     return;
+                case 7:
+                    AddressBookMain.countByOption();
+                    break;
                 default:
                     System.out.println("Please enter a valid option");
                     break;

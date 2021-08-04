@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
-    public ArrayList<Contact> contactList = new ArrayList<>();
+    static public ArrayList<Contact> contactList = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     public static Map<String, Contact> nameHashMap = new HashMap<String, Contact>();
     public static Map<String, Contact> cityHashMap = new HashMap<String, Contact>();
@@ -30,6 +30,31 @@ public class AddressBookMain {
         }
     }
 
+    public static void countByOption() {
+
+        System.out.println("1. Count City ");
+        System.out.println("2. Count State");
+        System.out.println("3. Back ");
+        System.out.println("Enter Your Choice : ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            case 1:
+                Map<String, Long> countCity = contactList.stream()
+                        .collect(Collectors.groupingBy(e -> e.getCity(), Collectors.counting()));
+                System.out.println(countCity + "\n");
+                break;
+            case 2:
+                Map<String, Long> countState = contactList.stream()
+                        .collect(Collectors.groupingBy(e -> e.getState(), Collectors.counting()));
+                System.out.println(countState + "\n");
+                break;
+            case 3:
+                return;
+            default:
+                System.out.println("Invalid Option");
+        }
+    }
     public boolean addContact(Contact contact) {
         List<Contact> checkByName = searchByName(contact.getFirstName());
         for (Contact equalName : checkByName)
