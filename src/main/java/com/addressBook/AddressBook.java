@@ -10,7 +10,7 @@ public class AddressBook {
 
         while (true) {
             System.out.println("Welcome to Address Book System");
-            System.out.println("Enter yur choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. Exit");
+            System.out.println("Enter yur choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -40,6 +40,9 @@ public class AddressBook {
                 case 4:
                     book.searchByOptions();
                 case 5:
+                    AddressBookMain.viewByOption(map);
+                    break;
+                case 6:
                     sc.close();
                     return;
                 default:

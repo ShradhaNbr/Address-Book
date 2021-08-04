@@ -1,12 +1,34 @@
 package com.addressBook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
     public ArrayList<Contact> contactList = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+    public static Map<String, Contact> nameHashMap = new HashMap<String, Contact>();
+    public static Map<String, Contact> cityHashMap = new HashMap<String, Contact>();
+    public static Map<String, Contact> stateHashMap = new HashMap<String, Contact>();
+
+    public static void viewByOption(Map<String, AddressBookMain> map) {
+        System.out.println("Enter you choice \n1.view by name \n2. view by city \n3.view by state \n4.back");
+        int choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                viewByName(nameHashMap);
+                break;
+            case 2:
+                viewByCity(cityHashMap);
+                break;
+            case 3:
+                viewByState(stateHashMap);
+                break;
+            case 4:
+                return;
+            default:
+                System.out.println("Please enter a valid choice");
+        }
+    }
 
     public boolean addContact(Contact contact) {
         List<Contact> checkByName = searchByName(contact.getFirstName());
@@ -33,7 +55,18 @@ public class AddressBookMain {
         return contactList.stream().filter(person -> person.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList());
     }
+    //method to view person
+    public static void viewByName(Map<String, Contact> nameHashMap) {
+        nameHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "=" + e.getValue().toString()));
+    }
 
+    public static void viewByCity(Map<String, Contact> cityHashMap) {
+        cityHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "=" + e.getValue().toString()));
+    }
+
+    public static void viewByState(Map<String, Contact> stateHashMap) {
+        stateHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "=" + e.getValue().toString()));
+    }
     // method for edit contact
     public boolean editContact(Contact current, Contact edit) {
         if (!contactList.contains(current))
@@ -63,7 +96,6 @@ public class AddressBookMain {
 
     // method for adding details
     public static Contact readContact() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Enter First Name: ");
         String firstName = sc.nextLine();
         System.out.print("Enter Last Name: ");
