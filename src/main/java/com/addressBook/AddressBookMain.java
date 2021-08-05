@@ -97,6 +97,11 @@ public class AddressBookMain {
     public static List<Contact> sortBy(Function<? super Contact, ?  extends String> key) {
         return contactList.stream().sorted(Comparator.comparing(key)).collect(Collectors.toList());
     }
+    public static List<Contact> sortByZip(Function<? super Contact, ?  extends Long> key) {
+        return contactList.stream().sorted(Comparator.comparing(key)).collect(Collectors.toList());
+    }
+
+
     // method for edit contact
     public boolean editContact(Contact current, Contact edit) {
         if (!contactList.contains(current))
@@ -253,15 +258,23 @@ public class AddressBookMain {
 
     }
     public static void sortByOption() {
-        System.out.println("Choose how you want to sort 1. first name 2. last name");
+        System.out.println("Choose how you want to sort 1. first name 2. last name 3.city 4.state 5.zip");
         int choice = sc.nextInt();
         switch(choice) {
             case 1 : AddressBookMain.sortBy(Contact::getFirstName).forEach(System.out::println);
                 break;
             case 2 : AddressBookMain.sortBy(Contact::getLastName).forEach(System.out::println);
                 break;
+            case 3 : AddressBookMain.sortBy(Contact::getCity).forEach(System.out::println);
+                break;
+            case 4 : AddressBookMain.sortBy(Contact::getState).forEach(System.out::println);
+                break;
+            case 5 : AddressBookMain.sortByZip(Contact::getZipCode).forEach(System.out::println);
+                break;
             default:
                 System.out.println("Please enter a valid choice");
         }
     }
+
+
 }
