@@ -1,6 +1,7 @@
 package com.addressBook;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
@@ -92,6 +93,10 @@ public class AddressBookMain {
     public static void viewByState(Map<String, Contact> stateHashMap) {
         stateHashMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "=" + e.getValue().toString()));
     }
+
+    public static List<Contact> sortBy(Function<? super Contact, ?  extends String> key) {
+        return contactList.stream().sorted(Comparator.comparing(key)).collect(Collectors.toList());
+    }
     // method for edit contact
     public boolean editContact(Contact current, Contact edit) {
         if (!contactList.contains(current))
@@ -151,7 +156,8 @@ public class AddressBookMain {
             System.out.println("2. Edit contact details");
             System.out.println("3. Delete contact details");
             System.out.println("4. Show contacts details");
-            System.out.println("5. Back to main menu");
+            System.out.println("5. Sort Address Book");
+            System.out.println("6. Back to main menu");
             System.out.print("Enter Your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -169,11 +175,10 @@ public class AddressBookMain {
                     if (equalName.isEmpty())// if not match found
                         System.out.println("List Empty!!!");
                     else if (equalName.size() == 1) {// if only one equal match found
-                        addressBook.editContact(equalName.get(0), readContact()); // call edit method with name and method
-                        // parameter
+                        addressBook.editContact(equalName.get(0), readContact()); // call edit method
                         System.out.println("Contact data modified");
                     } else {// if more than one firstname match found in equal name list
-                        equalName.forEach(x -> System.out.println(equalName.indexOf(x) + "  " + x.toString()));
+                        equalName.forEach(i -> System.out.println(equalName.indexOf(i) + "  " + i.toString()));
                         System.out.println("Enter index to edit : ");
                         int i = sc.nextInt();
                         sc.nextLine();
@@ -202,7 +207,9 @@ public class AddressBookMain {
                 case 4:
                     System.out.println(addressBook.toString());
                     break;
-                case 5:
+                case 5:sortByOption();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Invalid Choice!");
@@ -210,6 +217,7 @@ public class AddressBookMain {
             }
         }
     }
+
 
     public void searchByOptions() {
         AddressBookMain addressBook = new AddressBookMain();
@@ -243,5 +251,17 @@ public class AddressBookMain {
                 System.out.println("Please Enter a Valid Choice");
         }
 
+    }
+    public static void sortByOption() {
+        System.out.println("Choose how you want to sort 1. first name 2. last name");
+        int choice = sc.nextInt();
+        switch(choice) {
+            case 1 : AddressBookMain.sortBy(Contact::getFirstName).forEach(System.out::println);
+                break;
+            case 2 : AddressBookMain.sortBy(Contact::getLastName).forEach(System.out::println);
+                break;
+            default:
+                System.out.println("Please enter a valid choice");
+        }
     }
 }
