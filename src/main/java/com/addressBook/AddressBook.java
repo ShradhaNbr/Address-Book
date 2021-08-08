@@ -8,9 +8,10 @@ public class AddressBook {
         AddressBookMain book = new AddressBookMain();
         Map<String, AddressBookMain> map = new HashMap<>();
 
+
         while (true) {
             System.out.println("Welcome to Address Book System");
-            System.out.println("Enter yur choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Exit");
+            System.out.println("Enter your choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -43,11 +44,12 @@ public class AddressBook {
                     AddressBookMain.viewByOption(map);
                     break;
                 case 6:
-                    sc.close();
-                    return;
-                case 7:
                     AddressBookMain.countByOption();
                     break;
+                case 7:
+                    sc.close();
+                    return;
+
                 default:
                     System.out.println("Please enter a valid option");
                     break;

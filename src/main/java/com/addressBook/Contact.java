@@ -10,7 +10,7 @@ public class Contact {
     String email;
 
     public Contact(String firstName, String lastName, String address, String city, String state, Long zipCode,
-                       Long phoneNumber, String email) {
+                   Long phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -19,6 +19,10 @@ public class Contact {
         this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Contact() {
+
     }
 
     @Override

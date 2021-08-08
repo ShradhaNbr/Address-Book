@@ -1,0 +1,2 @@
+Friends[Contacts [firstName=Deepti, lastName=Nam, address=Praya, city=Kann, state=Kerala, zipCode=670562, phoneNumber=85763359, email=deep]]
+Fam[Contacts [firstName=Shradha, lastName=Nambiar, address=Smri, city=Kann, state=Kerala, zipCode=670562, phoneNumber=956755277, email=sradha]]
