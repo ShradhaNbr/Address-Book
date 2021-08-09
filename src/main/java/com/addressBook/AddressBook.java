@@ -14,7 +14,7 @@ public class AddressBook {
 
         while (true) {
             System.out.println("Welcome to Address Book System");
-            System.out.println("Enter your choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Write Data \n8.Read Data \n9.Write Data into CSV file \n10.Read Data into CSV file\n11.Exit");
+            System.out.println("Enter your choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Write Data \n8.Read Data \n9.Write Data into CSV file \n10.Read Data into CSV file\n11.Write Data into Json file \n12.Read Data into Json file\n11.Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -65,6 +65,21 @@ public class AddressBook {
                 case 10:
                     try {
                         CSVFile.readDataFromCSV();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case 11:
+                    try {
+                        JSON.writeDataToJSon();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 12:
+                    try {
+                        JSON.readDataFromJson();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

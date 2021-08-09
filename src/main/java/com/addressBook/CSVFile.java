@@ -20,7 +20,7 @@ public class CSVFile {
         try (Writer writer = Files.newBufferedWriter(Paths.get("C:\\Users\\HP\\java\\day19\\Address Books\\Address Book.csv"));) {
             StatefulBeanToCsvBuilder<Contact> builder = new StatefulBeanToCsvBuilder<>(writer);
             StatefulBeanToCsv<Contact> beanWriter = builder.build();
-            beanWriter.write(AddressBook.contactList);
+            beanWriter.write(AddressBookMain.contactList);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
