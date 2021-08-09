@@ -1,8 +1,8 @@
-com/addressBook/FileIO.java
- com.addressBook.FileIO
 com/addressBook/Contact.java
  com.addressBook.Contact
 com/addressBook/AddressBookMain.java
  com.addressBook.AddressBookMain
+com/addressBook/FileIO.java
+ com.addressBook.FileIO
 com/addressBook/AddressBook.java
  com.addressBook.AddressBook

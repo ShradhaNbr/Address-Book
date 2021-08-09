@@ -1,34 +1,68 @@
 package com.addressBook;
 
+import com.addressBook.AddressBook;
+
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileIO {
-    String filePath = "C:\\Users\\HP\\java\\day19\\Address Books\\Address Book.txt";
+        public void writeData(Map<String, AddressBook> addressBook) {
+                File file = new File("C:\\Users\\HP\\java\\day19\\Address Books\\Address Book.txt");
+                BufferedWriter bw = null;;
+                try {
+                        //create new BufferedWriter for the output file
+                        bw = new BufferedWriter(new FileWriter(file));
 
-    public void writeData(Hashtable<String, ArrayList<Contact>> personInfoDict) {
-        StringBuffer empBuffer = new StringBuffer();
-        personInfoDict.forEach( (companyName, personInfos) -> {
-            String empDataString = companyName.concat(personInfos.toString().concat("\n"));
-            empBuffer.append(empDataString);
-        });
+                        //iterate map entries
+                        for (Map.Entry<String, AddressBook> entry : addressBook.entrySet()) {
+                                //put key and value separated by a colon
+                                bw.write(entry.getKey() + ":" + entry.getValue());
 
-        try {
-            Files.write(Paths.get(filePath) , empBuffer.toString().getBytes());
-        } catch(IOException e) {
-            e.printStackTrace();
+                                //new line
+                                bw.newLine();
+                        }
+                        bw.flush();
+                }
+                catch (IOException e) {
+                        e.printStackTrace();
+                }
         }
-    }
 
-    public void readData() {
-        try {
-            Files.lines(new File(filePath).toPath())
-                    .forEach(System.out::println);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        //  public List<Contacts> readData() {
+        public static Map<String,  String> readData() {
+                Map<String, String> mapFileContents = new HashMap<>();
+                BufferedReader br = null;
+                try {
+                        //create file object
+                        File file = new File("C:\\Users\\HP\\java\\day19\\Address Books\\Address Book.txt");
+
+                        //create BufferedReader object from the File
+                        br = new BufferedReader(new FileReader(file));
+
+                        String line = null;
+                        //read file line by line
+                        while ((line = br.readLine()) != null) {
+
+                                //split the line by :
+                                String[] parts = line.split(":");
+
+                                String bookName = parts[0].trim();
+                                String fname = parts[1].trim();
+                                mapFileContents.put(bookName, fname);
+                        }
+
+                } catch (Exception e) {
+                        e.printStackTrace();
+                } finally {
+                        //Always close the BufferedReader
+                        if (br != null) {
+                                try {
+                                        br.close();
+                                } catch (Exception e) {
+                                }
+                        }
+                }
+                return mapFileContents;
         }
-    }
 }

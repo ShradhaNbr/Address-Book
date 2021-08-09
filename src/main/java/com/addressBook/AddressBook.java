@@ -7,11 +7,11 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         AddressBookMain book = new AddressBookMain();
         Map<String, AddressBookMain> map = new HashMap<>();
-
+        Map<String, AddressBook> addressBookMap = new HashMap<>();
 
         while (true) {
             System.out.println("Welcome to Address Book System");
-            System.out.println("Enter your choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Exit");
+            System.out.println("Enter your choice \n1. New Address Book \n2. Select Address Book \n3. Delete Address Book \n4. Search Contact Data \n5. view Contact details \n6.count contacts \n7.Write Data \n8.Read Data \n9.Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -46,7 +46,13 @@ public class AddressBook {
                 case 6:
                     AddressBookMain.countByOption();
                     break;
-                case 7:
+                case 7 : FileIO fileIO = new FileIO();
+                    fileIO.writeData(addressBookMap);
+                        break;
+                case 8 : FileIO fileIORead = new FileIO();
+                    System.out.println(fileIORead.readData());
+                    break;
+                case 9:
                     sc.close();
                     return;
 

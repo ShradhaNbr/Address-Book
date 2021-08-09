@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 
 public class AddressBookMain {
     static public ArrayList<Contact> contactList = new ArrayList<>();
-    static Hashtable<String, ArrayList<Contact>> personInfoDict = new Hashtable<>();
     static Scanner sc = new Scanner(System.in);
-    static FileIO fileio = new FileIO();
     public static Map<String, Contact> nameHashMap = new HashMap<String, Contact>();
     public static Map<String, Contact> cityHashMap = new HashMap<String, Contact>();
     public static Map<String, Contact> stateHashMap = new HashMap<String, Contact>();
@@ -58,59 +56,14 @@ public class AddressBookMain {
                 System.out.println("Invalid Option");
         }
     }
-    public Hashtable<String,ArrayList<Contact>> addContact() {
-        Hashtable<String, ArrayList<Contact>> personInfo = new Hashtable<>();
-        ArrayList<Contact> personList = new ArrayList<>();
-    Contact person = null;
-    boolean check =false;
-    person = new Contact();
-        System.out.println("Enter the name of address book");
-        String addressBookName = sc.next();
-        System.out.print("Enter the First Name: ");
-        person.setFirstName(sc.next().toString());
-        System.out.print("Enter the Last Name: ");
-        person.setLastName(sc.next().toString());
-        System.out.print("Enter the Address: ");
-        person.setAddress(sc.next().toString());
-        System.out.print("Enter the City: ");
-        person.setCity(sc.next().toString());
-        System.out.print("Enter the State: ");
-        person.setState(sc.next().toString());
-        System.out.print("Enter the Zip: ");
-        person.setZipCode(sc.nextLong());
-        System.out.print("Enter the Phone Number: ");
-        person.setPhoneNumber(sc.nextLong());
-        System.out.print("Enter the Email: ");
-        person.setEmail(sc.next().toString());
-
-        if (personInfoDict.containsKey(addressBookName)) {
-            ArrayList<Contact> value = personInfoDict.get(addressBookName);
-            for (int j = 0; j < value.size(); j++) {
-
-                List<String> names = value.stream().map(Contact::getFirstName).collect(Collectors.toList());
-                for ( int k = 0; k < names.size(); k++)  {
-                    if(names.get(j).equals(person.getFirstName())) {
-                        check = true;
-                        break;
-                    }
-                }
-            }
-            if (check == true)
-                System.out.println("\nAddress Book already exists\n");
-            else {
-                value.add(person);
-                personInfoDict.put(addressBookName, value);
-            }
-        }
-        else {
-            personList = new ArrayList<>();
-            personList.add(person);
-            personInfoDict.put(addressBookName, personList);
-        }
-
-        return personInfoDict;
+    public boolean addContact(Contact contact) {
+        List<Contact> checkByName = searchByName(contact.getFirstName());
+        for (Contact equalName : checkByName)
+            if (equalName.equals(contact))
+                return false;
+        contactList.add(contact);
+        return true;
     }
-
 
     // method for search contact by name
     public List<Contact> searchByName(String name) {
@@ -215,10 +168,10 @@ public class AddressBookMain {
             sc.nextLine();
             switch (choice) {
                 case 1:
-                    System.out.println("\n" + "Add a new Address Book");
-                    personInfoDict = addressBook.addContact();
-                    fileio.writeData(personInfoDict);
-                    //System.out.println(personInfoDict + "\n");
+                    if (addressBook.addContact(readContact())) // call add contact with passing method read contact
+                        System.out.println("Contact Added Successfully");
+                    else
+                        System.out.println("Contact Already Exists");
                     break;
                 case 2:
                     System.out.println("Enter First name to edit contact: ");
@@ -257,8 +210,7 @@ public class AddressBookMain {
                     }
                     break;
                 case 4:
-                    System.out.println("\n" + "Display all contacts in the Address Book");
-                    fileio.readData();
+                    System.out.println(addressBook.toString());
                     break;
                 case 5:sortByOption();
                     break;

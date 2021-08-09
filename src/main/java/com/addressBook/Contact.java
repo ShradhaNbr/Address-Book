@@ -21,10 +21,6 @@ public class Contact {
         this.email = email;
     }
 
-    public Contact() {
-
-    }
-
     @Override
     public String toString() {
         return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
