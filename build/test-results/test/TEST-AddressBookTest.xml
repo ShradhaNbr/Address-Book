@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AddressBookTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2021-08-22T06:56:06" hostname="SHRADHA" time="0.03">
+<testsuite name="AddressBookTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2021-08-22T08:06:23" hostname="SHRADHA" time="0.032">
   <properties/>
-  <testcase name="givenAddressBookInDB_WhenRetrieved_ShouldMatchContact()" classname="AddressBookTest" time="0.03">
-    <failure message="java.lang.NullPointerException: Cannot invoke &quot;AddressBook.readDataFromContact(AddressBook$IOService)&quot; because &quot;this.addressBook&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;AddressBook.readDataFromContact(AddressBook$IOService)&quot; because &quot;this.addressBook&quot; is null
-	at AddressBookTest.givenAddressBookInDB_WhenRetrieved_ShouldMatchContact(AddressBookTest.java:20)
+  <testcase name="givenNewAddressForContact_WhenUpdated_ShouldSyncWithDB()" classname="AddressBookTest" time="0.032">
+    <failure message="java.lang.NullPointerException: Cannot invoke &quot;AddressBook.readPersonInfoData(AddressBook$IOService)&quot; because &quot;this.addressBook&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;AddressBook.readPersonInfoData(AddressBook$IOService)&quot; because &quot;this.addressBook&quot; is null
+	at AddressBookTest.givenNewAddressForContact_WhenUpdated_ShouldSyncWithDB(AddressBookTest.java:27)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

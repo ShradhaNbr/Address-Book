@@ -6,7 +6,6 @@ import java.util.List;
 
 public class AddressBookTest {
     AddressBook addressBook ;
-    private Assertions Assert;
 
     @Before
     public void setUp() throws Exception {
@@ -17,8 +16,17 @@ public class AddressBookTest {
      */
     @Test
     public void givenAddressBookInDB_WhenRetrieved_ShouldMatchContact() {
-        List<Contact> contacts = addressBook.readDataFromContact(AddressBook.IOService.DB_IO);
-        Assert.assertEquals(5, contacts.size());
+        List<Contact> contacts = addressBook.readPersonInfoData(AddressBook.IOService.DB_IO);
+        Assertions.assertEquals(5, contacts.size());
     }
-
+    /**
+     * Purpose : To test whether when address is updated in db it should sync
+     */
+    @Test
+    public void givenNewAddressForContact_WhenUpdated_ShouldSyncWithDB() {
+        addressBook.readPersonInfoData(AddressBook.IOService.DB_IO);
+        addressBook.updateContact("Shradha","Abc");
+        boolean result = addressBook.checkPersonInfoInSyncWithDB("Shradha");
+        Assertions.assertTrue(result);
+    }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class AddressBookDB {
     private static AddressBookDB addressBookDB;
+    private PreparedStatement personInfoDataStatement;
 
     /**
      * Purpose : For creating a singleton object
@@ -67,4 +68,67 @@ public class AddressBookDB {
         System.out.println("Connection is successful!!!" + connection);
         return connection;
     }
+
+    public int updateContact(String name, String address) {
+        return this.updatePersonInfoUsingStatement(name,address);
+    }
+
+    private int updatePersonInfoUsingStatement(String name, String address) {
+        String sql = String.format("UPDATE address_book SET address = '%s' WHERE firstname = '%s';", address, name);
+        try (Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            return statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Contact> getPersonInfoData(String name) {
+        List<Contact> contacts = null;
+        if(this.personInfoDataStatement == null)
+            this.preparedStatementForPersonInfo();
+        try {
+            personInfoDataStatement.setString(1, name);
+            ResultSet resultSet = personInfoDataStatement.executeQuery();
+            contacts = this.getPersonInfoData(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contacts;
+    }
+
+    private void preparedStatementForPersonInfo() {
+        try {
+            Connection connection = this.getConnection();
+            String sql = "SELECT * FROM address_book WHERE firstname = ?";
+            personInfoDataStatement = connection.prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<Contact> getPersonInfoData(ResultSet resultSet) {
+        List<Contact> addressBookList = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                int number = resultSet.getInt("number");
+                String type = resultSet.getString("type");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String address = resultSet.getString("address");
+                String city = resultSet.getString("city");
+                String state = resultSet.getString("state");
+                int zip = resultSet.getInt("zip");
+                String phoneNumber = resultSet.getString("phone_number");
+                String emailId = resultSet.getString("Email");
+                addressBookList.add(new Contact(number, firstName, lastName, address, city, state, zip, phoneNumber, emailId));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return addressBookList;
+    }
+
 }
+

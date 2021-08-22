@@ -20,4 +20,6 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.email = emailId;
     }
+
+
 }
